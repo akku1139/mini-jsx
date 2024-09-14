@@ -1,0 +1,14 @@
+{
+  "$schema": "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/tsconfig.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": [
+      "DOM",
+      "ESNext",
+      // "WebWorker"
+    ],
+    "strict": true,
+    "baseUrl": "src/"
+  }
+}
