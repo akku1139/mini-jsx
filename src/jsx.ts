@@ -9,4 +9,17 @@ export namespace JSX {
   }
   export interface Element {
   }
+  export interface ElementClass {
+    render: (props: {
+      children: Array<ChildNode>
+    }) => HTMLElement
+  }
 }
+
+export type ChildNode = string | Component | HTMLElement
+
+export type Component = ((props: {
+  children: Array<ChildNode>
+}) => HTMLElement) | JSX.ElementClass
+
+export type EventHandlerProps = `on:${keyof HTMLElementEventMap}`

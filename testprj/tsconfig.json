@@ -9,11 +9,13 @@
       // "WebWorker"
     ],
     "strict": true,
-    "baseUrl": "src/",
 
     "jsx": "react-jsx",
     "jsxImportSource": "../../src",
-    // "jsxFactory": "h",
-    // "jsxFragmentFactory": "Fragment",
+
+    "paths": {
+      "mj": ["../src"],
+      "mj/*": ["../src/*"]
+    }
   }
 }

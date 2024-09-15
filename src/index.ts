@@ -1,7 +1,7 @@
-import { JSX } from "./jsx"
+import type { JSX, Component, ChildNode, EventHandlerProps } from "./jsx"
 
 type Props = {
-  [T in keyof HTMLElementEventMap as `on:${T}`]: EventListenerOrEventListenerObject
+  [T in EventHandlerProps]: EventListenerOrEventListenerObject
 } & {
   [key in PropertyKey]: string
 } | {[key: string]: never}
@@ -11,7 +11,7 @@ type Props = {
 export const h = (
   tag: keyof HTMLElementTagNameMap | Function,
   props: Props,
-  ...children: Array<string | Element>
+  ...children: Array<ChildNode>
 ) => {
   if(typeof tag === "function") {
     return tag(props, children)
@@ -20,12 +20,25 @@ export const h = (
   const e = document.createElement(tag)
 
   for(const propName in props) {
-    if(((name: string): name is `on:${keyof HTMLElementEventMap}` => name.startsWith('on'))(propName)) {
-      const prop = props[propName]
-      e.addEventListener(propName.slice(3).toLowerCase(), prop)
+    if(((name: string): name is EventHandlerProps => name.startsWith('on'))(propName)) {
+      e.addEventListener(
+        propName.slice(3).toLowerCase(),
+        props[propName]
+      )
     } else {
-      const prop = props[propName]
-      e.setAttribute(propName, prop)
+      e.setAttribute(propName, props[propName])
+    }
+  }
+
+  for(const child of children) {
+    if(typeof child === "string") {
+      e.appendChild(
+        document.createTextNode(child)
+      )
+    } else if(typeof child?.render === "function") {
+
+    } else {
+      e.appendChild(child)
     }
   }
 }
@@ -33,3 +46,7 @@ export const h = (
 export const Flagment = (props: { children: JSX.Element }) => props.children
 
 // TODO: render
+export const render = (child: Component, root: HTMLElement) => {
+  if()
+  root.appendChild(child({ children: [] }))
+}
