@@ -16,7 +16,7 @@ export namespace JSX {
   }
 }
 
-export type ChildNode = string | Component | HTMLElement
+export type ChildNode = HTMLElement | string
 
 export type Component = ((props: {
   children: Array<ChildNode>

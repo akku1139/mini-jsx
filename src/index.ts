@@ -35,8 +35,6 @@ export const h = (
       e.appendChild(
         document.createTextNode(child)
       )
-    } else if(typeof child?.render === "function") {
-
     } else {
       e.appendChild(child)
     }
@@ -47,6 +45,5 @@ export const Flagment = (props: { children: JSX.Element }) => props.children
 
 // TODO: render
 export const render = (child: Component, root: HTMLElement) => {
-  if()
   root.appendChild(child({ children: [] }))
 }
