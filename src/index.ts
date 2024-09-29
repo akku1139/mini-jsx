@@ -19,6 +19,7 @@ export const h = (
 
   const e = document.createElement(tag)
 
+  // https://www.tohoho-web.com/html/memo/attr.htm
   for(const propName in props) {
     if(((name: string): name is EventHandlerProps => name.startsWith('on'))(propName)) {
       e.addEventListener(
